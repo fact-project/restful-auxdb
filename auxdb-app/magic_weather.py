@@ -19,13 +19,14 @@ resource_fields = {
 class MagicWeatherResource(Resource):
     def get(self):
         args = parser.parse_args(strict=True)
+        print(args['field'])
 
         query = {}
         projection = {'_id': False}
 
         if args['field']:
-            for column in args['field']:
-                projection['field'] = True
+            for field in args['field']:
+                projection[field] = True
 
         if args['from']:
             query['timestamp'] = {'$gt': args['from']}
