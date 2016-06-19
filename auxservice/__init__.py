@@ -21,17 +21,18 @@ api.add_resource(DriveTrackingResource, '/drive_tracking')
 api.add_resource(DrivePointingResource, '/drive_pointing')
 api.add_resource(DriveSourceResource, '/drive_source')
 
+services = database.collection_names()
+services.remove('system.indexes')
+services.sort()
+
 
 @app.route('/')
 def main_page():
-    return render_template('index.html')
+    return render_template('index.html', services=services)
 
 
 @app.route('/services')
-def services():
-    services = database.collection_names()
-    services.remove('system.indexes')
-    services.sort()
+def service_overview():
     return render_template('services.html', services=services)
 
 
@@ -41,4 +42,6 @@ def service(service):
     fields = list(entry.keys())
     fields.remove('_id')
     fields.sort()
-    return render_template('service.html', fields=fields, service=service)
+    return render_template(
+        'service.html', fields=fields, service=service, services=services
+    )
