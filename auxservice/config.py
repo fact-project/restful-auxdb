@@ -2,7 +2,12 @@ import os
 import yaml
 
 
-config = {}
+config = {
+    'mongodb': {
+        'database': 'auxdata',
+        'port': 27017,
+    }
+}
 
 config_files = (
     os.path.join(os.environ['HOME'], '.restful-auxdb', 'config.yaml'),
@@ -24,3 +29,6 @@ if 'FACT_AUX_MONGODB_PORT' in os.environ:
 
 if 'FACT_AUX_MONGODB_PASSWORD' in os.environ:
     config['mongodb']['password'] = os.environ['FACT_AUX_MONGODB_PASSWORD']
+
+if 'FACT_AUX_MONGODB_DATABASE' in os.environ:
+    config['mongodb']['database'] = os.environ['FACT_AUX_MONGODB_DATABASE']

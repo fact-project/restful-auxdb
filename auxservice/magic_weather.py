@@ -1,13 +1,16 @@
-from flask_restful import Resource, reqparse, inputs
+from flask_restful import Resource, reqparse
 from .database import database
 from flask_json import as_json
+from .utils import convert_to_datetime
+from .utils import build_from_until_query
+
 
 collection = database.magic_weather
 
 parser = reqparse.RequestParser()
 parser.add_argument('field', action='append')
-parser.add_argument('from', type=inputs.datetime_from_iso8601)
-parser.add_argument('until', type=inputs.datetime_from_iso8601)
+parser.add_argument('from', type=convert_to_datetime)
+parser.add_argument('until', type=convert_to_datetime)
 
 
 class MagicWeatherResource(Resource):
@@ -22,10 +25,6 @@ class MagicWeatherResource(Resource):
             for field in args['field']:
                 projection[field] = True
 
-        if args['from']:
-            query['timestamp'] = {'$gt': args['from']}
-
-        if args['until']:
-            query['timestamp'] = {'$lt': args['until']}
+        query = build_from_until_query(args['from'], args['until'])
 
         return {'objects': collection.find(query, projection=projection)}
