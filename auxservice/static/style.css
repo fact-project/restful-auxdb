@@ -1,0 +1,27 @@
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans);
+body {
+  font-family: 'Fira Sans', sans-serif;
+}
+code {
+  font-family: 'Fira Mono', monospace;
+  font-size: small;
+  color: darkblue;
+  font-kerning: none;
+  padding-left: 2px;
+  margin-left: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  overflow: auto;
+  padding: 0.5em 1em;
+  border-radius: 3px;
+}
+
+.content {
+    margin-left: 10%;
+    width: 80%;
+}
