@@ -1,27 +1,25 @@
 FROM ubuntu:16.04
 
-RUN apt update && apt upgrade -y && apt install -y nginx ca-certificates 
+RUN apt update && apt upgrade -y && apt install -y nginx ca-certificates curl bzip2
 RUN locale-gen en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 
-RUN apt install -y curl bzip2
 RUN curl https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
-    -o miniconda.sh \
-    && bash miniconda.sh -b -p /opt/miniconda/ \
-    && echo 'export PATH=/opt/miniconda/bin:$PATH' > /etc/profile.d/conda.sh
+  -o miniconda.sh \
+  && bash miniconda.sh -b -p /opt/miniconda/ \
+  && echo 'export PATH=/opt/miniconda/bin:$PATH' > /etc/profile.d/conda.sh
 
 ENV PATH /opt/miniconda/bin:$PATH
 
-RUN conda install -y -q flask pandas pymongo
-RUN conda install -y -q -c conda-forge uwsgi
-RUN pip install flask_restful flask_json
+RUN conda install -y -q flask pandas pymongo \
+  && conda install -y -q -c conda-forge uwsgi \
+  && pip install flask_restful flask_json
 
-RUN rm /etc/nginx/sites-enabled/default
-RUN mkdir /var/log/uwsgi && chown -R www-data:www-data /var/log/uwsgi
-RUN mkdir /var/www/auxservice-www && chown -R www-data:www-data /var/www/auxservice-www
-RUN ln -s /var/www/auxservice-www/auxservice_nginx.conf /etc/nginx/conf.d/
-
+RUN rm /etc/nginx/sites-enabled/default \
+  && mkdir /var/log/uwsgi && chown -R www-data:www-data /var/log/uwsgi \
+  && mkdir /var/www/auxservice-www && chown -R www-data:www-data /var/www/auxservice-www \
+  && ln -s /var/www/auxservice-www/auxservice_nginx.conf /etc/nginx/conf.d/
 
 
 COPY auxservice_nginx.conf /var/www/auxservice-www/
