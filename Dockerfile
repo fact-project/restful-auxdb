@@ -14,7 +14,7 @@ ENV PATH /opt/miniconda/bin:$PATH
 
 RUN conda install -y -q flask pandas pymongo \
   && conda install -y -q -c conda-forge uwsgi \
-  && pip install flask_restful flask_json
+  && pip install flask_restful flask_json flask_httpauth
 
 RUN rm /etc/nginx/sites-enabled/default \
   && mkdir /var/log/uwsgi && chown -R www-data:www-data /var/log/uwsgi \

@@ -3,6 +3,7 @@ from .database import database as db
 from flask_json import as_json
 from .utils import convert_to_datetime
 from .utils import build_from_until_query
+from .auth import auth
 
 parser = reqparse.RequestParser()
 parser.add_argument('field', action='append')
@@ -11,6 +12,7 @@ parser.add_argument('until', type=convert_to_datetime)
 
 
 class AuxResource(Resource):
+    method_decorators = [auth.login_required]
     collection = None
 
     @as_json
