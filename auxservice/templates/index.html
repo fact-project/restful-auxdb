@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="text-box">
+  <h3>Auxiliary Data</h3>
+  <p>
+    This web service provides auxiliary data written by the telescope sensors during data taking.
+    You can select the name of the table and the time range for which you want the information.
+    Simply point your browser to
+    <pre>
+      /&lt;service&gt;?from=&lt;isodate&gt;&until=&lt;isodate&gt;</p>
+    </pre>
+    and you'll recieve the data encoded in .json format.
+    You can also select specific fields by querying like this:
+    <pre>
+      /&lt;service&gt;?field=field1&field=field2&from=&lt;isodate&gt;&until=&lt;isodate&gt;</p>
+    </pre>
+    E.g. using this url,  
+    <pre>
+      /magic_weather?field=humidity&field=timestamp&from=2016-01-01&until=2016-01-02</p>
+    </pre>
+    will give you timestamps and humidity values for the first January 2016.
+    Whereas
+    <pre>
+      /drive_tracking?field=timestamp&field=zenith&from=2016-01-01T22:00&until=2016-01-01T23:00
+    </pre>
+    will give you the zenith distance of the telescope's pointing position
+    and timestamps for an hour of data taking.
+  </p>
+</div>
+{% endblock %}
