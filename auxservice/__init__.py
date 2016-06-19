@@ -2,7 +2,7 @@ from flask import Flask
 from flask_restful import Api
 from flask_json import FlaskJSON
 
-from .magic_weather import MagicWeatherResource
+from .resources import MagicWeatherResource
 
 app = Flask('FACT auxdb rest interface')
 api = Api(app)
