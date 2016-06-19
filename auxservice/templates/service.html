@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+<div>
+  <h3>{{ service }}</h3>
+  <p> Available fields: </p>
+  <ul>
+    {% for field in fields %}
+      <li>{{ field }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

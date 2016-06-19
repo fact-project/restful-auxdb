@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+<div>
+  <h3>Aux data services</h3>
+  <p> Currently, the following services are available: </p>
+  <ul>
+    {% for service in services %}
+      <li>{{ service }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
