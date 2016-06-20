@@ -18,5 +18,24 @@
     will give you the zenith distance of the telescope's pointing position
     and timestamps for an hour of data taking.
   </p>
+
+  <p>
+    How to get values into pandas dataframes:
+    <pre><code>
+    import pandas as pd
+    from datetime import datetime
+    import requests
+
+    url = 'http://auxdb.app.tu-dortmund.de/magic_weather'
+    ret = requests.get(url, params={
+        'from': datetime(2016, 1, 1),
+        'until': datetime(2016, 1, 2),
+	'field': ['timestamp', 'humidity']
+    })
+
+    df = pd.DataFrame(ret.json()['magic_weather'])
+    </code></pre>
+  </p>
+
 </div>
 {% endblock %}
