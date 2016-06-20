@@ -20,7 +20,8 @@ config = {
     'mongodb': {
         'database': 'auxdata',
         'port': 27017,
-    }
+    },
+    'users': {},
 }
 
 config_files = (
@@ -47,7 +48,7 @@ if 'FACT_AUX_MONGODB_PASSWORD' in os.environ:
 if 'FACT_AUX_MONGODB_DATABASE' in os.environ:
     config['mongodb']['database'] = os.environ['FACT_AUX_MONGODB_DATABASE']
 
-if 'FACT_AUX_USER' in os.environ and 'FACT_AUX_PASSWORD in os.environ':
+if 'FACT_AUX_USER' in os.environ and 'FACT_AUX_PASSWORD' in os.environ:
     config['users'].update(
         {os.environ['FACT_AUX_USER']: os.environ['FACT_AUX_PASSWORD']}
     )
