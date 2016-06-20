@@ -1,6 +1,20 @@
 import os
 import yaml
+from collections import Mapping
 
+
+def update(d, u):
+    '''
+    Update a dict recursively
+    from http://stackoverflow.com/a/3233356/3838691
+    '''
+    for k, v in u.items():
+        if isinstance(v, Mapping):
+            r = update(d.get(k, {}), v)
+            d[k] = r
+        else:
+            d[k] = u[k]
+    return d
 
 config = {
     'mongodb': {
@@ -16,7 +30,7 @@ config_files = (
 for config_file in config_files:
     if os.path.isfile(config_file):
         with open(config_file) as f:
-            config.update(yaml.safe_load(f))
+            config = update(config, yaml.safe_load(f))
 
 if 'FACT_AUX_MONGODB_USER' in os.environ:
     config['mongodb']['user'] = os.environ['FACT_AUX_MONGODB_USER']
