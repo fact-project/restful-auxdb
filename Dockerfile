@@ -5,6 +5,9 @@ RUN locale-gen en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 
+EXPOSE 80
+EXPOSE 443
+
 RUN curl https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
   -o miniconda.sh \
   && bash miniconda.sh -b -p /opt/miniconda/ \
