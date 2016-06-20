@@ -25,7 +25,7 @@ RUN rm /etc/nginx/sites-enabled/default \
 COPY auxservice_nginx.conf /var/www/auxservice-www/
 COPY auxservice /var/www/auxservice-www/auxservice
 COPY auxservice_uwsgi.ini /var/www/auxservice-www/
-COPY run.py config.yaml /var/www/auxservice-www/
+COPY run.py /var/www/auxservice-www/
 RUN chown -R www-data:www-data /var/www/auxservice-www
 
 
