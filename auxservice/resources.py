@@ -27,7 +27,11 @@ class AuxResource(Resource):
 
         query = build_from_until_query(args['from'], args['until'])
 
-        return {'objects': self.collection.find(query, projection=projection)}
+        return {
+            self.collection.name: self.collection.find(
+                query, projection=projection
+            )
+        }
 
 
 class MagicWeatherResource(AuxResource):
