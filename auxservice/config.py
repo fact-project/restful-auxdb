@@ -18,6 +18,7 @@ def update(d, u):
 
 config = {
     'mongodb': {
+        'host': 'mongo',
         'database': 'auxdata',
         'port': 27017,
     },
