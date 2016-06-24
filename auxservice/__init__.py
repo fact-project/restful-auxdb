@@ -9,6 +9,8 @@ from .resources import (
     DriveSourceResource,
     DrivePointingResource,
     DriveTrackingResource,
+    FSCHumidityResource,
+    FSCTemperatureResource,
 )
 
 app = Flask(__name__)
@@ -20,6 +22,8 @@ api.add_resource(PfMiniResource, '/pf_mini')
 api.add_resource(DriveTrackingResource, '/drive_tracking')
 api.add_resource(DrivePointingResource, '/drive_pointing')
 api.add_resource(DriveSourceResource, '/drive_source')
+api.add_resource(FSCHumidityResource, '/fsc_humidity')
+api.add_resource(FSCTemperatureResource, '/fsc_temperature')
 
 
 def get_services():

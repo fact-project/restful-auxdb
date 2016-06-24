@@ -52,3 +52,11 @@ class DrivePointingResource(AuxResource):
 
 class DriveSourceResource(AuxResource):
     collection = db.drive_source
+
+
+class FSCHumidityResource(AuxResource):
+    collection = db.fsc_humidity
+
+
+class FSCTemperatureResource(AuxResource):
+    collection = db.fsc_temperature
