@@ -60,3 +60,7 @@ class FSCHumidityResource(AuxResource):
 
 class FSCTemperatureResource(AuxResource):
     collection = db.fsc_temperature
+
+
+class FTMTriggerRatesResource(AuxResource):
+    collection = db.ftm_trigger_rates

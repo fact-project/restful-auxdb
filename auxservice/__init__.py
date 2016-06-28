@@ -11,6 +11,7 @@ from .resources import (
     DriveTrackingResource,
     FSCHumidityResource,
     FSCTemperatureResource,
+    FTMTriggerRatesResource,
 )
 
 app = Flask(__name__)
@@ -24,6 +25,7 @@ api.add_resource(DrivePointingResource, '/drive_pointing')
 api.add_resource(DriveSourceResource, '/drive_source')
 api.add_resource(FSCHumidityResource, '/fsc_humidity')
 api.add_resource(FSCTemperatureResource, '/fsc_temperature')
+api.add_resource(FTMTriggerRatesResource, '/ftm_trigger_rates')
 
 
 def get_services():
