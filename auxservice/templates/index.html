@@ -6,15 +6,16 @@
     This web service provides auxiliary data written by the telescope sensors during data taking.
     You can select the name of the table and the time range for which you want the information.
     Simply point your browser to
-    <pre><code>/&lt;service&gt;?from=&lt;isodate&gt;&until=&lt;isodate&gt;</pre></code>
+    <pre><code>https://auxdb.app.tu-dortmund.de/&lt;service&gt;?from=&lt;isodate&gt;&until=&lt;isodate&gt;</pre></code>
     and you'll recieve the data encoded in .json format.
     You can also select specific fields by querying like this:
-    <pre><code>/&lt;service&gt;?field=field1&field=field2&from=&lt;isodate&gt;&until=&lt;isodate&gt;</code></pre>
+    <pre><code>https://auxdb.app.tu-dortmund.de/&lt;service&gt;?field=field1&field=field2&from=&lt;isodate&gt;&until=&lt;isodate&gt;</code></pre>
     E.g. using this url,  
-    <pre><code>/magic_weather?field=humidity&field=timestamp&from=2016-01-01&until=2016-01-02</code></pre>
+    <a href="https://auxdb.app.tu-dortmund.de/magic_weather?field=humidity&field=timestamp&from=2016-01-01&until=2016-01-02"><pre><code>https://auxdb.app.tu-dortmund.de/magic_weather?field=humidity&field=timestamp&from=2016-01-01&until=2016-01-02</code></pre></a>
+
     will give you timestamps and humidity values for the first January 2016.
     Whereas
-    <pre><code>/drive_tracking?field=timestamp&field=zenith&from=2016-01-01T22:00&until=2016-01-01T23:00</code></pre>
+    <a href="https://auxdb.app.tu-dortmund.de/drive_tracking?field=timestamp&field=zenith&from=2016-01-01T22:00&until=2016-01-01T23:00"><pre><code>https://auxdb.app.tu-dortmund.de/drive_tracking?field=timestamp&field=zenith&from=2016-01-01T22:00&until=2016-01-01T23:00</code></pre></a>
     will give you the zenith distance of the telescope's pointing position
     and timestamps for an hour of data taking.
   </p>
@@ -22,18 +23,18 @@
   <p>
     How to get values into pandas dataframes:
     <pre><code class="python">
-    import pandas as pd
-    from datetime import datetime
-    import requests
+import pandas as pd
+from datetime import datetime
+import requests
 
-    url = 'http://auxdb.app.tu-dortmund.de/magic_weather'
-    ret = requests.get(url, auth=(user, passwd), params={
-        'from': datetime(2016, 1, 1),
-        'until': datetime(2016, 1, 2),
-	'field': ['timestamp', 'humidity']
-    })
+url = 'https://auxdb.app.tu-dortmund.de/magic_weather'
+ret = requests.get(url, auth=(user, passwd), params={
+    'from': datetime(2016, 1, 1),
+    'until': datetime(2016, 1, 2),
+    'field': ['timestamp', 'humidity']
+})
 
-    df = pd.DataFrame(ret.json()['magic_weather'])
+df = pd.DataFrame(ret.json()['magic_weather'])
     </code></pre>
   </p>
 
