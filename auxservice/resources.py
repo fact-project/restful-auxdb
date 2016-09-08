@@ -4,6 +4,7 @@ from flask_json import as_json
 from .utils import convert_to_datetime
 from .utils import build_from_until_query
 from .auth import auth
+from pymongo.errors import ConnectionFailure
 
 parser = reqparse.RequestParser()
 parser.add_argument('field', action='append')
@@ -27,11 +28,15 @@ class AuxResource(Resource):
 
         query = build_from_until_query(args['from'], args['until'])
 
-        return {
-            self.collection.name: self.collection.find(
-                query, projection=projection
-            )
-        }
+        try:
+            return {
+                self.collection.name: self.collection.find(
+                    query, projection=projection
+                ),
+                'success': True,
+            }
+        except ConnectionFailure:
+            return {'success:', False}, 503
 
 
 class MagicWeatherResource(AuxResource):

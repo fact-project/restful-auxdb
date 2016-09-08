@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask_restful import Api
 from flask_json import FlaskJSON
 from .database import database
+from pymongo.errors import ConnectionFailure
 
 from .resources import (
     MagicWeatherResource,
@@ -50,10 +51,15 @@ def service_overview():
 
 @app.route('/services/<service>')
 def service(service):
-    entry = database[service].find_one()
+    try:
+        entry = database[service].find_one()
+    except ConnectionFailure:
+        entry = {}
     fields = list(entry.keys())
-    fields.remove('_id')
-    fields.sort()
+    if fields:
+        fields.remove('_id', )
+        fields.sort()
+
     return render_template(
         'service.html', fields=fields, service=service, services=get_services()
     )
