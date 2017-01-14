@@ -32,7 +32,7 @@ ignored_collections = ('system.indexes', 'str', 'type')
 
 def get_services():
     services = database.collection_names()
-    services = list(filter(lambda s: s not in ignored_collections))
+    services = list(filter(lambda s: s not in ignored_collections, services))
     services.sort()
 
     return services
