@@ -27,13 +27,12 @@ api.add_resource(FSCHumidityResource, '/fsc_humidity')
 api.add_resource(FSCTemperatureResource, '/fsc_temperature')
 api.add_resource(FTMTriggerRatesResource, '/ftm_trigger_rates')
 
+ignored_collections = ('system.indexes', 'str', 'type')
+
 
 def get_services():
     services = database.collection_names()
-    try:
-        services.remove('system.indexes')
-    except ValueError:
-        pass
+    services = list(filter(lambda s: s not in ignored_collections))
     services.sort()
 
     return services
