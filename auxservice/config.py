@@ -16,6 +16,7 @@ def update(d, u):
             d[k] = u[k]
     return d
 
+
 config = {
     'mongodb': {
         'host': 'mongo',
