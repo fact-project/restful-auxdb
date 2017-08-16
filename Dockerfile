@@ -1,6 +1,7 @@
 FROM ubuntu:16.04
 
-RUN apt update && apt upgrade -y && apt install -y nginx ca-certificates curl bzip2
+RUN apt update \
+	&& apt install -y nginx ca-certificates curl bzip2 build-essential
 RUN locale-gen en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
@@ -16,8 +17,7 @@ RUN curl https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
 ENV PATH /opt/miniconda/bin:$PATH
 
 RUN conda install -y -q flask pandas pymongo \
-  && conda install -y -q -c conda-forge uwsgi \
-  && pip install flask_restful flask_json flask_httpauth
+  && pip install flask_restful flask_json flask_httpauth pyyaml uwsgi
 
 RUN rm /etc/nginx/sites-enabled/default \
   && mkdir /var/log/uwsgi && chown -R www-data:www-data /var/log/uwsgi \
